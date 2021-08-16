@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'constants.dart';
+import 'welcomepage.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,13 +12,48 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Hospital Registration'),
       ),
-      body: Column(
-        children: [
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('PATIENT'),
-          )
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 50.0,
+              width: 170.0,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: kButtonColor, // background
+                  onPrimary: Colors.black, // foreground
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return WelcomePage();
+                      },
+                    ),
+                  );
+                },
+                child: Text('PATIENT'),
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            SizedBox(
+              height: 50.0,
+              width: 170.0,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: kButtonColor, // background
+                  onPrimary: Colors.black, // foreground
+                ),
+                onPressed: () {},
+                child: Text('DOCTOR'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

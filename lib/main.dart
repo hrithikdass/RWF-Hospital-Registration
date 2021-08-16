@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rwf_hospital_registration/patientloginpage.dart';
+import 'package:rwf_hospital_registration/welcomepage.dart';
 import 'homepage.dart';
 
 void main() {
@@ -10,14 +12,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'RWF Hospital registration',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
+        '/Welcome': (context) => WelcomePage(),
+        '/Patientlogi': (context) => PatientLoginPage(),
       },
     );
   }
 }
+
+/* colors app bar: 3F51B5
+button : FF4181
+text : EA4B81
+ */
