@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rwf_hospital_registration/patientloginpage.dart';
 import 'package:rwf_hospital_registration/registerpage.dart';
 import 'package:rwf_hospital_registration/statuspage.dart';
+import 'package:rwf_hospital_registration/welcomedoctor.dart';
 import 'package:rwf_hospital_registration/welcomepage.dart';
 import 'homepage.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/Patientlogi': (context) => PatientLoginPage(),
         '/Register': (context) => RegisterPage(),
         '/Status': (context) => StatusPage(),
+        '/doctor': (context) => WelcomeDoctor(),
       },
     );
   }

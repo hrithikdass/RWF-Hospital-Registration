@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rwf_hospital_registration/welcomedoctor.dart';
 import 'constants.dart';
 import 'welcomepage.dart';
 
@@ -48,7 +49,16 @@ class HomePage extends StatelessWidget {
                   primary: kButtonColor, // background
                   onPrimary: Colors.black, // foreground
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return WelcomeDoctor();
+                      },
+                    ),
+                  );
+                },
                 child: Text('DOCTOR'),
               ),
             ),

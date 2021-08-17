@@ -67,12 +67,13 @@ class _RegisterPageState extends State<RegisterPage> {
                           icon: Icon(
                             Icons.calendar_today_outlined,
                           ),
-                          onPressed: () {
-                            showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime.now());
+                          onPressed: () async {
+                            var selecteddate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                            );
                           },
                         ),
                       ),
