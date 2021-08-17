@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rwf_hospital_registration/patientloginpage.dart';
+import 'package:rwf_hospital_registration/registerpage.dart';
 import 'constants.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -15,7 +16,7 @@ class WelcomePage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Welcome!',
@@ -71,7 +72,7 @@ class WelcomePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return WelcomePage();
+                        return RegisterPage();
                       },
                     ),
                   );

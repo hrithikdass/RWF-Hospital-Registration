@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rwf_hospital_registration/patientloginpage.dart';
+import 'package:rwf_hospital_registration/registerpage.dart';
+import 'package:rwf_hospital_registration/statuspage.dart';
 import 'package:rwf_hospital_registration/welcomepage.dart';
 import 'homepage.dart';
 
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => HomePage(),
         '/Welcome': (context) => WelcomePage(),
         '/Patientlogi': (context) => PatientLoginPage(),
+        '/Register': (context) => RegisterPage(),
+        '/Status': (context) => StatusPage(),
       },
     );
   }
