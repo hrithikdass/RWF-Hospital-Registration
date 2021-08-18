@@ -9,7 +9,7 @@ class WelcomeDoctor extends StatefulWidget {
 }
 
 class _WelcomeDoctorState extends State<WelcomeDoctor> {
-  var DoctorName = "Default";
+  var docname = "Default";
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _WelcomeDoctorState extends State<WelcomeDoctor> {
                       ),
                     ),
                     Text(
-                      DoctorName,
+                      docname,
                       style: TextStyle(
                         color: kTextColor,
                         fontSize: 20.0,

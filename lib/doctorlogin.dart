@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:rwf_hospital_registration/welcomedoctor.dart';
 import 'constants.dart';
+import 'welcomedoctor.dart';
 
-class PatientLoginPage extends StatefulWidget {
-  const PatientLoginPage({Key? key}) : super(key: key);
+class DoctorLogin extends StatefulWidget {
+  const DoctorLogin({Key? key}) : super(key: key);
 
   @override
-  _PatientLoginPageState createState() => _PatientLoginPageState();
+  _DoctorLoginState createState() => _DoctorLoginState();
 }
 
-class _PatientLoginPageState extends State<PatientLoginPage> {
+class _DoctorLoginState extends State<DoctorLogin> {
+  final _key = GlobalKey<FormState>();
+
+  String _docusername = '';
+  String _docpassword = '';
   bool securetext = true;
-
-  final _pkey = GlobalKey<FormState>();
-
-  String _pusername = '';
-  String _ppassword = '';
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
         child: Container(
           padding: EdgeInsets.all(30.0),
           child: Form(
-            key: _pkey,
+            key: _key,
             child: Column(
               children: <Widget>[
                 Container(
@@ -52,7 +53,7 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
                           }
                         },
                         onSaved: (value) async {
-                          _pusername = value.toString();
+                          _docusername = value.toString();
                         },
                       ),
                     ],
@@ -92,14 +93,14 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
                           }
                         },
                         onSaved: (value) async {
-                          _ppassword = value.toString();
+                          _docpassword = value.toString();
                         },
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(35.0),
+                  margin: EdgeInsets.all(20.0),
                   child: SizedBox(
                     height: 50.0,
                     width: 140.0,
@@ -109,12 +110,20 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
                         onPrimary: Colors.black, // foreground
                       ),
                       onPressed: () {
-                        if (_pkey.currentState!.validate()) {
+                        if (_key.currentState!.validate()) {
                           print('data is submitted');
                         }
-                        _pkey.currentState!.save();
-                        print(_pusername);
-                        print(_ppassword);
+                        _key.currentState!.save();
+                        print(_docusername);
+                        print(_docpassword);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return WelcomeDoctor();
+                            },
+                          ),
+                        );
                       },
                       child: Text("LOGIN"),
                     ),

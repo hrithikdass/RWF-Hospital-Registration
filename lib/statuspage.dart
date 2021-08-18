@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rwf_hospital_registration/bookappointment.dart';
 import 'constants.dart';
 
 class StatusPage extends StatefulWidget {
@@ -30,7 +31,16 @@ class _StatusPageState extends State<StatusPage> {
                       size: 50.0,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return BookAppointment();
+                            },
+                          ),
+                        );
+                      },
                       child: Text(
                         'Book My Appointment',
                         style: TextStyle(

@@ -10,6 +10,17 @@ class BookAppointment extends StatefulWidget {
 class _BookAppointmentState extends State<BookAppointment> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Hospital Management'),
+      ),
+      body: Form(
+        child: Column(
+          children: <Widget>[
+            TextFormField(),
+          ],
+        ),
+      ),
+    );
   }
 }

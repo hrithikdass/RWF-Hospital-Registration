@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rwf_hospital_registration/welcomedoctor.dart';
+import 'package:rwf_hospital_registration/doctorlogin.dart';
 import 'constants.dart';
 import 'welcomepage.dart';
 
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return WelcomeDoctor();
+                        return DoctorLogin();
                       },
                     ),
                   );
