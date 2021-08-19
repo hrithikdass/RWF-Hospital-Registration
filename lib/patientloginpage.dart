@@ -21,7 +21,18 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hospital Management'),
+        title: Text('Hospital Registration'),
+        backgroundColor: kAppBar,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.more_vert),
+          )
+        ],
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.menu),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(

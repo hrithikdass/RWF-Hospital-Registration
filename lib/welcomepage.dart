@@ -11,8 +11,17 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Hospital Registration',
+        title: Text('Hospital Registration'),
+        backgroundColor: kAppBar,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.more_vert),
+          )
+        ],
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.menu),
         ),
       ),
       body: SingleChildScrollView(
