@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
@@ -11,7 +12,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 final _rkey = GlobalKey<FormState>();
-// DateTime _dateTime;
 String _regusername = '';
 String _regpassword = '';
 bool securetext = true;
@@ -32,7 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(15.0),
                   child: Column(
                     children: [
                       Text(
@@ -61,36 +61,38 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      Text(
-                        'DOB',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: kTextColor,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "User ID cannot be empty";
-                          } else if (value.length <= 5) {
-                            return "User ID show be greater than 5";
-                          } else {
-                            return null;
+                      DateTimePicker(
+                        type: DateTimePickerType.dateTimeSeparate,
+                        dateMask: 'd MMM, yyyy',
+                        initialValue: DateTime.now().toString(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2100),
+                        icon: Icon(Icons.event),
+                        dateLabelText: 'Date',
+                        timeLabelText: "Hour",
+                        selectableDayPredicate: (date) {
+                          // Disable weekend days to select from the calendar
+                          if (date.weekday == 6 || date.weekday == 7) {
+                            return false;
                           }
+
+                          return true;
                         },
-                        onSaved: (value) async {
-                          _regusername = value.toString();
+                        onChanged: (val) => print(val),
+                        validator: (val) {
+                          print(val);
+                          return null;
                         },
+                        onSaved: (val) => print(val),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(15.0),
                   child: Column(
                     children: [
                       Text(
@@ -121,7 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(15.0),
                   child: Column(
                     children: [
                       Text(
@@ -161,7 +163,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(15.0),
                   child: SizedBox(
                     height: 50.0,
                     width: 140.0,
