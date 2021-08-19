@@ -111,19 +111,18 @@ class _DoctorLoginState extends State<DoctorLogin> {
                       ),
                       onPressed: () {
                         if (_key.currentState!.validate()) {
-                          print('data is submitted');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return WelcomeDoctor();
+                              },
+                            ),
+                          );
                         }
                         _key.currentState!.save();
                         print(_docusername);
                         print(_docpassword);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return WelcomeDoctor();
-                            },
-                          ),
-                        );
                       },
                       child: Text("LOGIN"),
                     ),

@@ -16,79 +16,82 @@ class _StatusPageState extends State<StatusPage> {
       appBar: AppBar(
         title: Text('Hospital Management'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.menu_book,
-                      color: kAppBar,
-                      size: 50.0,
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return BookAppointment();
-                            },
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 100.0),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.menu_book,
+                        color: kAppBar,
+                        size: 50.0,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return BookAppointment();
+                              },
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Book My Appointment',
+                          style: TextStyle(
+                            color: kTextColor,
+                            fontSize: 20.0,
                           ),
-                        );
-                      },
-                      child: Text(
-                        'Book My Appointment',
-                        style: TextStyle(
-                          color: kTextColor,
-                          fontSize: 20.0,
                         ),
                       ),
-                    ),
-                    Text(
-                      'Book Appointment',
-                      style: TextStyle(
-                        color: kTextLight,
-                        fontSize: 13.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(55.0),
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.bookmark,
-                      color: kAppBar,
-                      size: 50.0,
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'My Appointment',
+                      Text(
+                        'Book Appointment',
                         style: TextStyle(
-                          color: kTextColor,
-                          fontSize: 20.0,
+                          color: kTextLight,
+                          fontSize: 13.0,
                         ),
                       ),
-                    ),
-                    Text(
-                      'Appointment History',
-                      style: TextStyle(
-                        color: kTextLight,
-                        fontSize: 13.0,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Container(
+                  margin: EdgeInsets.all(55.0),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.bookmark,
+                        color: kAppBar,
+                        size: 50.0,
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'My Appointment',
+                          style: TextStyle(
+                            color: kTextColor,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'Appointment History',
+                        style: TextStyle(
+                          color: kTextLight,
+                          fontSize: 13.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

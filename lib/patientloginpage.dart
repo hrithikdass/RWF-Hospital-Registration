@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rwf_hospital_registration/statuspage.dart';
 import 'constants.dart';
-import 'statuspage.dart';
 
 class PatientLoginPage extends StatefulWidget {
   const PatientLoginPage({Key? key}) : super(key: key);
@@ -111,19 +111,18 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
                       ),
                       onPressed: () {
                         if (_pkey.currentState!.validate()) {
-                          print('data is submitted');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return StatusPage();
+                              },
+                            ),
+                          );
                         }
                         _pkey.currentState!.save();
                         print(_pusername);
                         print(_ppassword);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              return StatusPage();
-                            },
-                          ),
-                        );
                       },
                       child: Text("LOGIN"),
                     ),

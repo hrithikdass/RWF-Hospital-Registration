@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rwf_hospital_registration/patientloginpage.dart';
 import 'constants.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -64,29 +65,39 @@ class _RegisterPageState extends State<RegisterPage> {
                   margin: EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      DateTimePicker(
-                        type: DateTimePickerType.dateTimeSeparate,
-                        dateMask: 'd MMM, yyyy',
-                        initialValue: DateTime.now().toString(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2100),
-                        icon: Icon(Icons.event),
-                        dateLabelText: 'Date',
-                        timeLabelText: "Hour",
-                        selectableDayPredicate: (date) {
-                          // Disable weekend days to select from the calendar
-                          if (date.weekday == 6 || date.weekday == 7) {
-                            return false;
-                          }
+                      Text(
+                        'DOB',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: kTextColor,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(right: 30.0),
+                        child: DateTimePicker(
+                          type: DateTimePickerType.date,
+                          dateMask: 'd MMM, yyyy',
+                          initialValue: DateTime.now().toString(),
+                          firstDate: DateTime(1950),
+                          lastDate: DateTime.now(),
+                          icon: Icon(Icons.event),
+                          dateLabelText: 'Date',
+                          selectableDayPredicate: (date) {
+                            // Disable weekend days to select from the calendar
+                            if (date.weekday == 6 || date.weekday == 7) {
+                              return false;
+                            }
 
-                          return true;
-                        },
-                        onChanged: (val) => print(val),
-                        validator: (val) {
-                          print(val);
-                          return null;
-                        },
-                        onSaved: (val) => print(val),
+                            return true;
+                          },
+                          onChanged: (val) => print(val),
+                          validator: (val) {
+                            print(val);
+                            return null;
+                          },
+                          onSaved: (val) => print(val),
+                        ),
                       ),
                     ],
                   ),
@@ -174,7 +185,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       onPressed: () {
                         if (_rkey.currentState!.validate()) {
-                          print('data is submitted');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return PatientLoginPage();
+                              },
+                            ),
+                          );
                         }
                         _rkey.currentState!.save();
                         print(_regusername);

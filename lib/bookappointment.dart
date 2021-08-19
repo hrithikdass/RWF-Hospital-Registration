@@ -71,13 +71,14 @@ class _BookAppointmentState extends State<BookAppointment> {
                   child: Column(
                     children: [
                       DateTimePicker(
-                        type: DateTimePickerType.date,
+                        type: DateTimePickerType.dateTimeSeparate,
                         dateMask: 'd MMM, yyyy',
                         initialValue: DateTime.now().toString(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime.now().add(new Duration(days: 2)),
                         icon: Icon(Icons.event),
                         dateLabelText: 'Date',
+                        timeLabelText: "Hour",
                         selectableDayPredicate: (date) {
                           // Disable weekend days to select from the calendar
                           if (date.weekday == 6 || date.weekday == 7) {
