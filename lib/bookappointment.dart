@@ -2,6 +2,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'package:interval_time_picker/interval_time_picker.dart';
 
 class BookAppointment extends StatefulWidget {
   const BookAppointment({Key? key}) : super(key: key);
@@ -74,22 +75,18 @@ class _BookAppointmentState extends State<BookAppointment> {
                   child: Column(
                     children: [
                       DateTimePicker(
-                        type: DateTimePickerType.dateTimeSeparate,
-                        dateMask: 'd MMM, yyyy',
                         initialValue: DateTime.now().toString(),
                         firstDate: DateTime.now(),
                         lastDate: DateTime.now().add(new Duration(days: 2)),
-                        icon: Icon(Icons.event),
                         dateLabelText: 'Date',
-                        timeLabelText: "Hour",
-                        selectableDayPredicate: (date) {
-                          // Disable weekend days to select from the calendar
-                          if (date.weekday == 6 || date.weekday == 7) {
-                            return false;
-                          }
-
-                          return true;
-                        },
+                        // selectableDayPredicate: (date) {
+                        //   // Disable weekend days to select from the calendar
+                        //   if (date.weekday == 6 || date.weekday == 7) {
+                        //     return false;
+                        //   }
+                        //
+                        //   return true;
+                        // },
                         onChanged: (val) => print(val),
                         validator: (val) {
                           print(val);
@@ -100,6 +97,38 @@ class _BookAppointmentState extends State<BookAppointment> {
                     ],
                   ),
                 ),
+                Container(
+                  margin: EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      DateTimePicker(
+                        type: DateTimePickerType.time,
+                        use24HourFormat: true,
+                        timeLabelText: 'Time',
+                        onChanged: (val) => print(val),
+                        validator: (val) {
+                          print(val);
+                          return null;
+                        },
+                        onSaved: (val) => print(val),
+                      ),
+                    ],
+                  ),
+                ),
+                // Container(
+                //   child: FutureBuilder(
+                //     child: Column(
+                //       children: [
+                //         showIntervalTimePicker(
+                //           context: context,
+                //           initialTime: TimeOfDay.fromDateTime(DateTime.now()),
+                //           interval: 5,
+                //           visibleStep: VisibleStep.Fifths,
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 Container(
                   margin: EdgeInsets.all(15.0),
                   child: Column(
@@ -179,3 +208,22 @@ List<String> cities = [
   "pondycherry",
   "ooty",
 ];
+
+class Todo {
+  final String title;
+  final String description;
+  final int date;
+  final int time;
+
+  const Todo(this.title, this.description, this.date, this.time);
+}
+
+final todos = List.generate(
+  20,
+  (i) => Todo(
+    'Todo $i',
+    'A description of what needs to be done for Todo $i',
+    20,
+    30,
+  ),
+);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rwf_hospital_registration/doctorlogin.dart';
+import 'package:rwf_hospital_registration/docviewappointment.dart';
+import 'package:rwf_hospital_registration/myappointment.dart';
 import 'package:rwf_hospital_registration/patientloginpage.dart';
 import 'package:rwf_hospital_registration/registerpage.dart';
 import 'package:rwf_hospital_registration/statuspage.dart';
@@ -30,6 +32,8 @@ class MyApp extends StatelessWidget {
         '/Status': (context) => StatusPage(),
         '/doctor': (context) => WelcomeDoctor(),
         '/doctorlogin': (context) => DoctorLogin(),
+        '/myappointment': (context) => MyAppointment(),
+        '/docviewappointment': (context) => DocViewAppointment(),
       },
     );
   }

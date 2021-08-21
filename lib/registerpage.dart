@@ -86,22 +86,34 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       Container(
                         margin: EdgeInsets.only(right: 30.0),
+                        // child: DateTimePicker(
+                        //   type: DateTimePickerType.date,
+                        //   dateMask: 'd MMM, yyyy',
+                        //   initialValue: DateTime.now().toString(),
+                        //   firstDate: DateTime(1950),
+                        //   lastDate: DateTime.now(),
+                        //   icon: Icon(Icons.event),
+                        //   dateLabelText: 'Date',
+                        //   selectableDayPredicate: (date) {
+                        //     // Disable weekend days to select from the calendar
+                        //     if (date.weekday == 6 || date.weekday == 7) {
+                        //       return false;
+                        //     }
+                        //
+                        //     return true;
+                        //   },
+                        //   onChanged: (val) => print(val),
+                        //   validator: (val) {
+                        //     print(val);
+                        //     return null;
+                        //   },
+                        //   onSaved: (val) => print(val),
+                        // ),
                         child: DateTimePicker(
-                          type: DateTimePickerType.date,
-                          dateMask: 'd MMM, yyyy',
                           initialValue: DateTime.now().toString(),
-                          firstDate: DateTime(1950),
-                          lastDate: DateTime.now(),
-                          icon: Icon(Icons.event),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime.now().add(new Duration(days: 2)),
                           dateLabelText: 'Date',
-                          selectableDayPredicate: (date) {
-                            // Disable weekend days to select from the calendar
-                            if (date.weekday == 6 || date.weekday == 7) {
-                              return false;
-                            }
-
-                            return true;
-                          },
                           onChanged: (val) => print(val),
                           validator: (val) {
                             print(val);

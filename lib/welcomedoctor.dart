@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rwf_hospital_registration/docviewappointment.dart';
 import 'constants.dart';
 
 class WelcomeDoctor extends StatefulWidget {
@@ -67,7 +68,16 @@ class _WelcomeDoctorState extends State<WelcomeDoctor> {
                       size: 50.0,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return DocViewAppointment();
+                            },
+                          ),
+                        );
+                      },
                       child: Text(
                         'Appointments',
                         style: TextStyle(
