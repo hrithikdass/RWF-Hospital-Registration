@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: 50.0,
+              height: 60.0,
               width: 170.0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -46,14 +46,17 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text('PATIENT'),
+                child: Text(
+                  'PATIENT',
+                  style: TextStyle(fontSize: 17.0),
+                ),
               ),
             ),
             SizedBox(
-              height: 35.0,
+              height: 30.0,
             ),
             SizedBox(
-              height: 50.0,
+              height: 60.0,
               width: 170.0,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -70,7 +73,10 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text('DOCTOR'),
+                child: Text(
+                  'DOCTOR',
+                  style: TextStyle(fontSize: 17.0),
+                ),
               ),
             ),
           ],

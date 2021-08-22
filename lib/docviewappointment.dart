@@ -105,25 +105,27 @@ class EachList extends StatelessWidget {
         decoration:
             BoxDecoration(border: Border.all(width: 1.5, color: kAppBar)),
         padding:
-            EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0, bottom: 15.0),
+            EdgeInsets.only(left: 20.0, right: 20.0, top: 5.0, bottom: 15.0),
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                new Text(
-                  'Patient Name',
-                  style: TextStyle(
-                    color: kTextLight,
-                    fontSize: 18.0,
-                  ),
-                ),
                 TextButton.icon(
                   onPressed: () {},
                   icon: Icon(Icons.cancel_presentation_outlined),
                   label: Text(''),
                 ),
               ],
+            ),
+            Container(
+              child: new Text(
+                'Patient Name',
+                style: TextStyle(
+                  color: kTextLight,
+                  fontSize: 18.0,
+                ),
+              ),
             ),
             new Text(
               patientname,

@@ -1,8 +1,10 @@
+import 'package:alert/alert.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
+import 'package:rwf_hospital_registration/main.dart';
+import 'package:rwf_hospital_registration/myappointment.dart';
 import 'constants.dart';
-import 'package:interval_time_picker/interval_time_picker.dart';
 
 class BookAppointment extends StatefulWidget {
   const BookAppointment({Key? key}) : super(key: key);
@@ -12,10 +14,10 @@ class BookAppointment extends StatefulWidget {
 }
 
 final _rkey = GlobalKey<FormState>();
-String _bookusername = '';
+String _docname = '';
+String _bookdate = '';
+String _booktime = '';
 String _bookdescription = '';
-bool securetext = true;
-String _regphonenum = '';
 
 class _BookAppointmentState extends State<BookAppointment> {
   @override
@@ -64,7 +66,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                         itemsVisibleInDropdown: 5,
                         items: cities,
                         onValueChanged: (value) {
-                          selectCities = value;
+                          _docname = value;
                         },
                       ),
                     ],
@@ -87,9 +89,9 @@ class _BookAppointmentState extends State<BookAppointment> {
                         //
                         //   return true;
                         // },
-                        onChanged: (val) => print(val),
-                        validator: (val) {
-                          print(val);
+                        onChanged: (_bookdate) => print(_bookdate),
+                        validator: (_bookdate) {
+                          print(_bookdate);
                           return null;
                         },
                         onSaved: (val) => print(val),
@@ -115,20 +117,6 @@ class _BookAppointmentState extends State<BookAppointment> {
                     ],
                   ),
                 ),
-                // Container(
-                //   child: FutureBuilder(
-                //     child: Column(
-                //       children: [
-                //         showIntervalTimePicker(
-                //           context: context,
-                //           initialTime: TimeOfDay.fromDateTime(DateTime.now()),
-                //           interval: 5,
-                //           visibleStep: VisibleStep.Fifths,
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
                 Container(
                   margin: EdgeInsets.all(15.0),
                   child: Column(
@@ -175,11 +163,29 @@ class _BookAppointmentState extends State<BookAppointment> {
                       onPressed: () {
                         if (_rkey.currentState!.validate()) {
                           print('data is submitted');
+                          // showDialog(
+                          //     context: context,
+                          //     builder: (context) {
+                          //       return Text('hello');
+                          //     });
+                          print(_docname);
+
+                          print(_bookdate);
+                          print(_booktime);
+                          print(_bookdescription);
+                          Alert(
+                            message: 'Booked',
+                          ).show();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return MyAppointment();
+                              },
+                            ),
+                          );
+                          _rkey.currentState!.save();
                         }
-                        _rkey.currentState!.save();
-                        print(_bookusername);
-                        print(_regphonenum);
-                        print(_bookdescription);
                       },
                       child: Text("BOOK"),
                     ),
@@ -194,8 +200,6 @@ class _BookAppointmentState extends State<BookAppointment> {
   }
 }
 
-String selectCities = "";
-
 final citiesSelected = TextEditingController();
 
 List<String> cities = [
@@ -208,22 +212,3 @@ List<String> cities = [
   "pondycherry",
   "ooty",
 ];
-
-class Todo {
-  final String title;
-  final String description;
-  final int date;
-  final int time;
-
-  const Todo(this.title, this.description, this.date, this.time);
-}
-
-final todos = List.generate(
-  20,
-  (i) => Todo(
-    'Todo $i',
-    'A description of what needs to be done for Todo $i',
-    20,
-    30,
-  ),
-);
