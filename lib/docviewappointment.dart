@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
@@ -109,23 +110,22 @@ class EachList extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                new Text(
+                  'Patient Name',
+                  style: TextStyle(
+                    color: kTextLight,
+                    fontSize: 18.0,
+                  ),
+                ),
                 TextButton.icon(
                   onPressed: () {},
                   icon: Icon(Icons.cancel_presentation_outlined),
                   label: Text(''),
                 ),
               ],
-            ),
-            Container(
-              child: new Text(
-                'Patient Name',
-                style: TextStyle(
-                  color: kTextLight,
-                  fontSize: 18.0,
-                ),
-              ),
             ),
             new Text(
               patientname,
@@ -134,9 +134,9 @@ class EachList extends StatelessWidget {
                 fontSize: 18.0,
               ),
             ),
-            SizedBox(
-              height: 10.0,
-            ),
+            // SizedBox(
+            //   height: 10.0,
+            // ),
             new Text(
               'Appointment Date',
               style: TextStyle(
@@ -151,9 +151,9 @@ class EachList extends StatelessWidget {
                 fontSize: 18.0,
               ),
             ),
-            SizedBox(
-              height: 10.0,
-            ),
+            // SizedBox(
+            //   height: 10.0,
+            // ),
             new Text(
               'Time',
               style: TextStyle(
@@ -163,23 +163,6 @@ class EachList extends StatelessWidget {
             ),
             new Text(
               appointmentTime,
-              style: TextStyle(
-                color: kTextColor,
-                fontSize: 18.0,
-              ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            new Text(
-              'Description',
-              style: TextStyle(
-                color: kTextLight,
-                fontSize: 18.0,
-              ),
-            ),
-            new Text(
-              description,
               style: TextStyle(
                 color: kTextColor,
                 fontSize: 18.0,
