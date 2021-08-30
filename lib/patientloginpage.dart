@@ -11,6 +11,8 @@ class PatientLoginPage extends StatefulWidget {
 
 class _PatientLoginPageState extends State<PatientLoginPage> {
   bool securetext = true;
+  String usernamelogin = 'admin';
+  String userpassword = 'admin';
 
   final _pkey = GlobalKey<FormState>();
 
@@ -57,8 +59,8 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "User ID cannot be empty";
-                          } else if (value.length <= 5) {
-                            return "User ID show be greater than 5";
+                          } else if (value != usernamelogin) {
+                            return "Enter correct User ID";
                           } else {
                             return null;
                           }
@@ -99,6 +101,8 @@ class _PatientLoginPageState extends State<PatientLoginPage> {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Password is required";
+                          } else if (value != userpassword) {
+                            return "Enter correct Password";
                           } else {
                             return null;
                           }

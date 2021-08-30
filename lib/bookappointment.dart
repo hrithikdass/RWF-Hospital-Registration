@@ -2,7 +2,6 @@ import 'package:alert/alert.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
-import 'package:rwf_hospital_registration/main.dart';
 import 'package:rwf_hospital_registration/myappointment.dart';
 import 'constants.dart';
 
@@ -18,6 +17,7 @@ String _docname = '';
 String _bookdate = '';
 String _booktime = '';
 String _bookdescription = '';
+// TextEditingController _bookdate = new TextEditingController();
 
 class _BookAppointmentState extends State<BookAppointment> {
   @override
@@ -176,12 +176,26 @@ class _BookAppointmentState extends State<BookAppointment> {
                           Alert(
                             message: 'Booked',
                           ).show();
-                          Navigator.push(
-                            context,
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) {
+                          //       return MyAppointment(
+                          //         date: _bookdate,
+                          //         description: _bookdescription,
+                          //         docname: _docname,
+                          //         time: _booktime,
+                          //       );
+                          //     },
+                          //   ),
+                          // );
+                          Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) {
-                                return MyAppointment();
-                              },
+                              builder: (context) => MyAppointment(
+                                  docname: _docname,
+                                  date: _bookdate,
+                                  time: _booktime,
+                                  description: _bookdescription),
                             ),
                           );
                           _rkey.currentState!.save();

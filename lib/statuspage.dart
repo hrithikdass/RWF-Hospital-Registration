@@ -88,7 +88,12 @@ class _StatusPageState extends State<StatusPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return MyAppointment();
+                                return MyAppointment(
+                                  date: '',
+                                  time: '',
+                                  description: '',
+                                  docname: '',
+                                );
                               },
                             ),
                           );

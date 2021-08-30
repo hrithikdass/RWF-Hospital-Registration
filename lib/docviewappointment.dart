@@ -110,6 +110,19 @@ class EachList extends StatelessWidget {
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  height: 35.0,
+                  child: TextButton.icon(
+                    onPressed: () {},
+                    icon: Icon(Icons.cancel_presentation_outlined),
+                    label: Text(''),
+                  ),
+                ),
+              ],
+            ),
+            Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -119,11 +132,6 @@ class EachList extends StatelessWidget {
                     color: kTextLight,
                     fontSize: 18.0,
                   ),
-                ),
-                TextButton.icon(
-                  onPressed: () {},
-                  icon: Icon(Icons.cancel_presentation_outlined),
-                  label: Text(''),
                 ),
               ],
             ),
