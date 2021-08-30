@@ -2,7 +2,9 @@ import 'package:alert/alert.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
+import 'package:interval_time_picker/interval_time_picker.dart';
 import 'package:rwf_hospital_registration/myappointment.dart';
+import 'package:time_picker_widget/time_picker_widget.dart';
 import 'constants.dart';
 
 class BookAppointment extends StatefulWidget {
@@ -81,20 +83,22 @@ class _BookAppointmentState extends State<BookAppointment> {
                         firstDate: DateTime.now(),
                         lastDate: DateTime.now().add(new Duration(days: 2)),
                         dateLabelText: 'Date',
-                        // selectableDayPredicate: (date) {
-                        //   // Disable weekend days to select from the calendar
-                        //   if (date.weekday == 6 || date.weekday == 7) {
-                        //     return false;
-                        //   }
-                        //
-                        //   return true;
-                        // },
+                        selectableDayPredicate: (date) {
+                          // Disable weekend days to select from the calendar
+                          if (date.weekday == 6 || date.weekday == 7) {
+                            return false;
+                          }
+
+                          return true;
+                        },
                         onChanged: (_bookdate) => print(_bookdate),
                         validator: (_bookdate) {
                           print(_bookdate);
                           return null;
                         },
-                        onSaved: (val) => print(val),
+                        onSaved: (value) async {
+                          _bookdate = value.toString();
+                        },
                       ),
                     ],
                   ),
@@ -104,6 +108,7 @@ class _BookAppointmentState extends State<BookAppointment> {
                   child: Column(
                     children: [
                       DateTimePicker(
+                        dateMask: 'd,mmm,yyyy',
                         type: DateTimePickerType.time,
                         use24HourFormat: true,
                         timeLabelText: 'Time',
@@ -112,7 +117,9 @@ class _BookAppointmentState extends State<BookAppointment> {
                           print(val);
                           return null;
                         },
-                        onSaved: (val) => print(val),
+                        onSaved: (value) async {
+                          _booktime = value.toString();
+                        },
                       ),
                     ],
                   ),
@@ -163,11 +170,6 @@ class _BookAppointmentState extends State<BookAppointment> {
                       onPressed: () {
                         if (_rkey.currentState!.validate()) {
                           print('data is submitted');
-                          // showDialog(
-                          //     context: context,
-                          //     builder: (context) {
-                          //       return Text('hello');
-                          //     });
                           print(_docname);
 
                           print(_bookdate);
@@ -193,8 +195,8 @@ class _BookAppointmentState extends State<BookAppointment> {
                             MaterialPageRoute(
                               builder: (context) => MyAppointment(
                                   docname: _docname,
-                                  date: _bookdate,
-                                  time: _booktime,
+                                  date: _bookdate.toString(),
+                                  time: _booktime.toString(),
                                   description: _bookdescription),
                             ),
                           );
