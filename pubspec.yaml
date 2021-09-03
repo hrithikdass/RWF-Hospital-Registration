@@ -18,6 +18,9 @@ dependencies:
   interval_time_picker: ^0.1.0
   alert: ^2.0.1
   time_picker_widget: ^1.0.0+10
+  http: ^0.13.3
+  fluttertoast: ^8.0.8
+  intl: ^0.17.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

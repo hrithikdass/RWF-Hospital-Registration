@@ -1,12 +1,12 @@
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rwf_hospital_registration/doctorlogin.dart';
 import 'constants.dart';
 import 'welcomepage.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +41,9 @@ class HomePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return WelcomePage();
+                        return WelcomePage(
+                          userid: '',
+                        );
                       },
                     ),
                   );

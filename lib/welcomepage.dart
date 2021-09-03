@@ -5,7 +5,7 @@ import 'package:rwf_hospital_registration/registerpage.dart';
 import 'constants.dart';
 
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  const WelcomePage({Key? key, required String userid}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +70,7 @@ class WelcomePage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return PatientLoginPage();
+                                return MyApp();
                               },
                             ),
                           );
@@ -108,7 +108,7 @@ class WelcomePage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return RegisterPage();
+                                return RegisterApp();
                               },
                             ),
                           );

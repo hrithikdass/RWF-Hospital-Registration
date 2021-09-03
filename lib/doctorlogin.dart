@@ -13,8 +13,8 @@ class DoctorLogin extends StatefulWidget {
 class _DoctorLoginState extends State<DoctorLogin> {
   final _key = GlobalKey<FormState>();
 
-  String _docusername = '';
-  String _docpassword = '';
+  String _docusername = 'doctor';
+  String _docpassword = 'doctor';
   bool securetext = true;
 
   @override
@@ -57,8 +57,8 @@ class _DoctorLoginState extends State<DoctorLogin> {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "User ID cannot be empty";
-                          } else if (value.length <= 5) {
-                            return "User ID show be greater than 5";
+                          } else if (value != _docusername) {
+                            return "Enter correct User ID";
                           } else {
                             return null;
                           }
@@ -99,6 +99,8 @@ class _DoctorLoginState extends State<DoctorLogin> {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Password is required";
+                          } else if (value != _docpassword) {
+                            return "Enter correct Password";
                           } else {
                             return null;
                           }

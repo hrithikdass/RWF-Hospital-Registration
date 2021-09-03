@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rwf_hospital_registration/doctorlogin.dart';
 import 'package:rwf_hospital_registration/docviewappointment.dart';
+import 'package:rwf_hospital_registration/information.dart';
 import 'package:rwf_hospital_registration/myappointment.dart';
 import 'package:rwf_hospital_registration/patientloginpage.dart';
 import 'package:rwf_hospital_registration/registerpage.dart';
@@ -26,12 +27,17 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomePage(),
-        '/Welcome': (context) => WelcomePage(),
-        '/Patientlogi': (context) => PatientLoginPage(),
-        '/Register': (context) => RegisterPage(),
-        '/Status': (context) => StatusPage(),
+        '/Welcome': (context) => WelcomePage(
+              userid: '',
+            ),
+        '/Patientlogi': (context) => MyApp(),
+        '/Register': (context) => RegisterApp(),
+        '/Status': (context) => StatusPage(
+              userid: '',
+            ),
         '/doctor': (context) => WelcomeDoctor(),
         '/doctorlogin': (context) => DoctorLogin(),
+        '/information': (context) => MyApp(),
         '/myappointment': (context) => MyAppointment(
               date: '',
               time: '',

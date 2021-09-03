@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rwf_hospital_registration/information.dart';
 import 'constants.dart';
 
 class DocViewAppointment extends StatefulWidget {

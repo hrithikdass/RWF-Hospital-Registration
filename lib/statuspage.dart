@@ -4,7 +4,7 @@ import 'package:rwf_hospital_registration/myappointment.dart';
 import 'constants.dart';
 
 class StatusPage extends StatefulWidget {
-  const StatusPage({Key? key}) : super(key: key);
+  const StatusPage({Key? key, required String userid}) : super(key: key);
 
   @override
   _StatusPageState createState() => _StatusPageState();
