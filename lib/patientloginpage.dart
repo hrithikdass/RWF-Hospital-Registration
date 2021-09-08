@@ -40,6 +40,7 @@ class LoginUser extends StatefulWidget {
 }
 
 class LoginUserState extends State {
+  final _pkey = GlobalKey<FormState>();
   // For CircularProgressIndicator.
   bool visible = false;
   bool securetext = true;
@@ -115,95 +116,123 @@ class LoginUserState extends State {
     return Scaffold(
         body: SingleChildScrollView(
             child: Center(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-          ),
-          Container(
-            child: Text(
-              'User ID',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: kTextColor,
-                fontSize: 18.0,
+      child: Form(
+        key: _pkey,
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(25.0),
+            ),
+
+            Container(
+              width: 280,
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  Text(
+                    'User ID',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: kTextColor,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  TextFormField(
+                    controller: useridController,
+                    autocorrect: true,
+                    // decoration:
+                    //     InputDecoration(hintText: 'Enter Your User ID Here'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "User ID cannot be empty";
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                ],
               ),
             ),
-          ),
-          Container(
-            width: 280,
-            padding: EdgeInsets.all(10.0),
-            child: TextField(
-              controller: useridController,
-              autocorrect: true,
-              decoration: InputDecoration(hintText: 'Enter Your User ID Here'),
+            SizedBox(
+              height: 20.0,
             ),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Container(
-            child: Text(
-              'Password',
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: kTextColor,
-                fontSize: 18.0,
+
+            Container(
+              width: 280,
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  Text(
+                    'Password',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: kTextColor,
+                      fontSize: 18.0,
+                    ),
+                  ),
+                  TextFormField(
+                    controller: passwordController,
+                    autocorrect: true,
+                    obscureText: securetext,
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: Icon(securetext
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        onPressed: () {
+                          setState(() {
+                            securetext = !securetext;
+                          });
+                        },
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Password is required";
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                ],
               ),
             ),
-          ),
-          Container(
-            width: 280,
-            padding: EdgeInsets.all(10.0),
-            child: TextField(
-              controller: passwordController,
-              autocorrect: true,
-              obscureText: securetext,
-              decoration:
-                  // InputDecoration(hintText: 'Enter Your Password Here'),
-                  InputDecoration(
-                suffixIcon: IconButton(
-                  icon: Icon(
-                      securetext ? Icons.visibility_off : Icons.visibility),
-                  onPressed: () {
-                    setState(() {
-                      securetext = !securetext;
-                    });
-                  },
+            SizedBox(
+              height: 20.0,
+            ),
+            SizedBox(
+              height: 50.0,
+              width: 140.0,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: kButtonColor, // background
+                  onPrimary: Colors.black, // foreground
                 ),
+                onPressed: () {
+                  if (_pkey.currentState!.validate()) {
+                    userLogin();
+                  }
+                },
+                // userLogin,
+                child: Text('LOGIN'),
               ),
             ),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          SizedBox(
-            height: 50.0,
-            width: 140.0,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: kButtonColor, // background
-                onPrimary: Colors.black, // foreground
+            // RaisedButton(
+            //   onPressed: userLogin,
+            //   color: kButtonColor,
+            //   textColor: Colors.white,
+            //   padding: EdgeInsets.fromLTRB(9, 9, 9, 9),
+            //   child: Text('LOGIN'),
+            // ),
+            Visibility(
+              visible: visible,
+              child: Container(
+                margin: EdgeInsets.only(bottom: 30),
+                child: CircularProgressIndicator(),
               ),
-              onPressed: userLogin,
-              child: Text('LOGIN'),
             ),
-          ),
-          // RaisedButton(
-          //   onPressed: userLogin,
-          //   color: kButtonColor,
-          //   textColor: Colors.white,
-          //   padding: EdgeInsets.fromLTRB(9, 9, 9, 9),
-          //   child: Text('LOGIN'),
-          // ),
-          Visibility(
-            visible: visible,
-            child: Container(
-              margin: EdgeInsets.only(bottom: 30),
-              child: CircularProgressIndicator(),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     )));
   }

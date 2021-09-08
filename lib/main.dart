@@ -35,16 +35,17 @@ class MyApp extends StatelessWidget {
         '/Status': (context) => StatusPage(
               userid: '',
             ),
-        '/doctor': (context) => WelcomeDoctor(),
+        '/doctor': (context) => WelcomeDoctor(
+              duserid: '',
+            ),
         '/doctorlogin': (context) => DoctorLogin(),
         '/information': (context) => MyApp(),
         '/myappointment': (context) => MyAppointment(
-              date: '',
-              time: '',
-              description: '',
-              docname: '',
+              userid: '',
             ),
-        '/docviewappointment': (context) => DocViewAppointment(),
+        '/docviewappointment': (context) => DocViewAppointment(
+              duserid: '',
+            ),
       },
     );
   }

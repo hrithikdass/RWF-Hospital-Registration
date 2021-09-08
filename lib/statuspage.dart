@@ -4,13 +4,15 @@ import 'package:rwf_hospital_registration/myappointment.dart';
 import 'constants.dart';
 
 class StatusPage extends StatefulWidget {
-  const StatusPage({Key? key, required String userid}) : super(key: key);
-
+  StatusPage({@required this.userid});
+  final userid;
   @override
-  _StatusPageState createState() => _StatusPageState();
+  _StatusPageState createState() => _StatusPageState(userid: userid);
 }
 
 class _StatusPageState extends State<StatusPage> {
+  _StatusPageState({required this.userid});
+  final userid;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,10 +51,8 @@ class _StatusPageState extends State<StatusPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) {
-                                return BookAppointment();
-                              },
-                            ),
+                                builder: (context) =>
+                                    BookAppointment(userid: userid)),
                           );
                         },
                         child: Text(
@@ -89,10 +89,7 @@ class _StatusPageState extends State<StatusPage> {
                             MaterialPageRoute(
                               builder: (context) {
                                 return MyAppointment(
-                                  date: '',
-                                  time: '',
-                                  description: '',
-                                  docname: '',
+                                  userid: userid,
                                 );
                               },
                             ),

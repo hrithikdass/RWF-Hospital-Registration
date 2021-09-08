@@ -39,6 +39,7 @@ class RegisterUser extends StatefulWidget {
 }
 
 class RegisterUserState extends State {
+  final _rkey = GlobalKey<FormState>();
   // Boolean variable for CircularProgressIndicator.
   bool visible = false;
   bool securetext = true;
@@ -114,189 +115,215 @@ class RegisterUserState extends State {
             child: Container(
       padding: EdgeInsets.all(15.0),
       child: Center(
-        child: Column(
-          children: <Widget>[
-            Container(
-                width: 280,
-                padding: EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'User ID',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: kTextColor,
-                        fontSize: 18.0,
+        child: Form(
+          key: _rkey,
+          child: Column(
+            children: <Widget>[
+              Container(
+                  width: 280,
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'User ID',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: kTextColor,
+                          fontSize: 18.0,
+                        ),
                       ),
-                    ),
-                    TextField(
-                      controller: useridController,
-                      autocorrect: true,
-                      decoration:
-                          InputDecoration(hintText: 'Enter Your User ID Here'),
-                    ),
-                  ],
-                )),
-            Container(
-                width: 280,
-                padding: EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    Text(
-                      'Name',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: kTextColor,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                    TextField(
-                      controller: nameController,
-                      autocorrect: true,
-                      decoration:
-                          InputDecoration(hintText: 'Enter Your Name Here'),
-                    ),
-                  ],
-                )),
-            Container(
-              width: 280,
-              padding: EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Text(
-                    'DOB',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: kTextColor,
-                      fontSize: 18.0,
-                    ),
-                  ),
-                  DateTimePicker(
-                    controller: dobcontroller,
-                    type: DateTimePickerType.date,
-                    dateMask: 'd MMM, yyyy',
-                    initialValue: null,
-                    firstDate: DateTime(1950),
-                    lastDate: DateTime.now(),
-                    icon: Icon(Icons.event),
-                    dateLabelText: 'Date',
-                    // onChanged: (val) => print(val),
-                    validator: (val) {
-                      print(val);
-                      return null;
-                    },
-                    onSaved: (value) async {
-                      print(dobcontroller);
-                    },
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: 280,
-              padding: EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Text(
-                    'Phone Number',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: kTextColor,
-                      fontSize: 18.0,
-                    ),
-                  ),
-                  TextFormField(
-                    controller: phonenumbercontroller,
-                    validator: (value) {
-                      print(value);
-                      if (value!.isEmpty) {
-                        return "Enter Phone Number";
-                      } else if (value.length != 10) {
-                        return "Enter correct number";
-                      } else {
-                        return null;
-                      }
-                    },
-                    onSaved: (val) => print(val),
-                    decoration: InputDecoration(prefixText: '+91'),
-                    keyboardType: TextInputType.number,
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: 280,
-              padding: EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  Text(
-                    'Password',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: kTextColor,
-                      fontSize: 18.0,
-                    ),
-                  ),
-                  TextField(
-                    controller: passwordController,
-                    autocorrect: true,
-                    obscureText: securetext,
-                    decoration:
-                        // InputDecoration(hintText: 'Enter Your Password Here'),
-                        InputDecoration(
-                      suffixIcon: IconButton(
-                        icon: Icon(securetext
-                            ? Icons.visibility_off
-                            : Icons.visibility),
-                        onPressed: () {
-                          setState(() {
-                            securetext = !securetext;
-                          });
+                      TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "User ID cannot be empty";
+                          } else {
+                            return null;
+                          }
                         },
+                        controller: useridController,
+                        autocorrect: true,
+                        // decoration: InputDecoration(
+                        //     hintText: 'Enter Your User ID Here'),
+                      ),
+                    ],
+                  )),
+              Container(
+                  width: 280,
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Name',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: kTextColor,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                      TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Name cannot be empty";
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: nameController,
+                        autocorrect: true,
+                        // decoration:
+                        //     InputDecoration(hintText: 'Enter Your Name Here'),
+                      ),
+                    ],
+                  )),
+              Container(
+                width: 280,
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'DOB',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: kTextColor,
+                        fontSize: 18.0,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            SizedBox(
-              height: 50.0,
-              width: 120.0,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: kButtonColor, // background
-                  onPrimary: Colors.black, // foreground
+                    DateTimePicker(
+                      controller: dobcontroller,
+                      type: DateTimePickerType.date,
+                      dateMask: 'd MMM, yyyy',
+                      initialValue: null,
+                      firstDate: DateTime(1950),
+                      lastDate: DateTime.now(),
+                      icon: Icon(Icons.event),
+                      dateLabelText: 'Date',
+                      // onChanged: (val) => print(val),
+                      validator: (val) {
+                        print(val);
+                        return null;
+                      },
+                      onSaved: (value) async {
+                        print(dobcontroller);
+                      },
+                    ),
+                  ],
                 ),
-                onPressed: userRegistration,
-                child: Text('REGISTER'),
               ),
-            ),
-            // RaisedButton(
-            //   onPressed: userRegistration,
-            //   color: Colors.green,
-            //   textColor: Colors.white,
-            //   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-            //   child: Text('Register'),
-            // ),
-            Visibility(
-              visible: visible,
-              child: Container(
-                margin: EdgeInsets.only(bottom: 30),
-                child: CircularProgressIndicator(),
+              Container(
+                width: 280,
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Phone Number',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: kTextColor,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                    TextFormField(
+                      controller: phonenumbercontroller,
+                      validator: (value) {
+                        print(value);
+                        if (value!.isEmpty) {
+                          return "Enter Phone Number";
+                        } else if (value.length != 10) {
+                          return "Enter correct number";
+                        } else {
+                          return null;
+                        }
+                      },
+                      onSaved: (val) => print(val),
+                      decoration: InputDecoration(prefixText: '+91'),
+                      keyboardType: TextInputType.number,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              Container(
+                width: 280,
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Password',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: kTextColor,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Name cannot be empty";
+                        } else {
+                          return null;
+                        }
+                      },
+                      controller: passwordController,
+                      autocorrect: true,
+                      obscureText: securetext,
+                      decoration:
+                          // InputDecoration(hintText: 'Enter Your Password Here'),
+                          InputDecoration(
+                        suffixIcon: IconButton(
+                          icon: Icon(securetext
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                          onPressed: () {
+                            setState(() {
+                              securetext = !securetext;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              SizedBox(
+                height: 50.0,
+                width: 120.0,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: kButtonColor, // background
+                    onPrimary: Colors.black, // foreground
+                  ),
+                  onPressed: () {
+                    if (_rkey.currentState!.validate()) {
+                      userRegistration();
+                    }
+                  },
+                  // userRegistration,
+                  child: Text('REGISTER'),
+                ),
+              ),
+              // RaisedButton(
+              //   onPressed: userRegistration,
+              //   color: Colors.green,
+              //   textColor: Colors.white,
+              //   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              //   child: Text('Register'),
+              // ),
+              Visibility(
+                visible: visible,
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 30),
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     )));
   }
 }
-
-//
-//
 
 // class RegisterPage extends StatefulWidget {
 //   const RegisterPage({Key? key}) : super(key: key);
