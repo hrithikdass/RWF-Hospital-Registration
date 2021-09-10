@@ -1,12 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:alert/alert.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
-import 'package:interval_time_picker/interval_time_picker.dart';
-import 'package:rwf_hospital_registration/myappointment.dart';
-import 'package:time_picker_widget/time_picker_widget.dart';
+import 'package:rwf_hospital_registration/models/doctor_response_model.dart';
 import 'constants.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,7 +14,7 @@ class BookAppointment extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
-              title: Text('User Registration Form'),
+              title: Text('Hospital Registration'),
               backgroundColor: kAppBar,
               actions: [
                 IconButton(
@@ -27,10 +22,10 @@ class BookAppointment extends StatelessWidget {
                   icon: Icon(Icons.more_vert),
                 )
               ],
-              leading: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.menu),
-              ),
+              // leading: IconButton(
+              //   onPressed: () {},
+              //   icon: Icon(Icons.menu),
+              // ),
             ),
             body: Center(
                 child: Booking(
@@ -38,6 +33,11 @@ class BookAppointment extends StatelessWidget {
             ))));
   }
 }
+
+String name = '';
+var duserid;
+List results = [];
+String doctorname = '';
 
 class Booking extends StatefulWidget {
   Booking({required this.userid});
@@ -51,12 +51,62 @@ class _BookingState extends State {
   _BookingState({required this.userid});
   final userid;
   final _rkey = GlobalKey<FormState>();
+  String message = '';
+  bool error = false;
+  DoctorResponseModel data = DoctorResponseModel();
+  Map<String?, dynamic> doctorMap = {};
+  Data? selectedDoctor = Data();
+  var isLoading = true;
+
+  Future getdoctornames() async {
+    // SERVER API URL
+    var url =
+        'https://blotchiest-exposure.000webhostapp.com/booking/get_doctornames.php';
+    // Starting Web API Call.
+    var res = await http.get(Uri.parse(url));
+    if (res.statusCode == 200) {
+      setState(() {
+        var encodeData = jsonDecode(res.body);
+        data = DoctorResponseModel.fromJson(encodeData);
+        if (data.errmsg!.isEmpty) {
+          //check fi there is any error from server.
+          error = true;
+          message = data.errmsg!;
+        }
+      });
+    } else {
+      //there is error
+      setState(() {
+        error = true;
+        message = "Error during fetching data";
+      });
+    }
+    // Getting Server response into variable.
+    // var message = jsonDecode(response.body);
+    // results = message[1 - 10]["doctorname"];
+    // print(results);
+  }
+
+  Future getUserName() async {
+    // SERVER API URL
+    var url =
+        'https://blotchiest-exposure.000webhostapp.com/booking/get_patientname.php';
+    print(userid);
+    // Starting Web API Call.
+    var response = await http.post(Uri.parse(url), body: {
+      'userid': userid,
+    });
+
+    // Getting Server response into variable.
+    var message = jsonDecode(response.body);
+    name = message[0]["name"];
+    print(name);
+  }
+
   // Boolean variable for CircularProgressIndicator.
   bool visible = false;
   bool securetext = true;
   String doctorname = '';
-  String duserid = '';
-  String name = '';
 
   // Getting value from TextField widget.
   final descriptionController = TextEditingController();
@@ -76,7 +126,7 @@ class _BookingState extends State {
 
     // SERVER API URL
     var url =
-        'https://blotchiest-exposure.000webhostapp.com/book_appointment.php';
+        'https://blotchiest-exposure.000webhostapp.com/booking/book_appointment.php';
 
     // Store all data with Param Name.
     var data = {
@@ -85,9 +135,11 @@ class _BookingState extends State {
       'date': date,
       'time': time,
       'description': description,
-      'duserid': duserid,
-      'doctorname': doctorname,
+      'duserid': selectedDoctor!.duserid,
+      'doctorname': selectedDoctor!.doctorname,
     };
+
+    print(data);
 
     // Starting Web API Call.
     var response = await http.post(Uri.parse(url), body: json.encode(data));
@@ -122,133 +174,201 @@ class _BookingState extends State {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    getDoctorDetails();
+    setState(() {
+      isLoading = false;
+    });
+    super.initState();
+  }
+
+  getDoctorDetails() async {
+    await getdoctornames();
+    selectedDoctor = data.data!.first;
+    await getUserName();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-      padding: EdgeInsets.all(15.0),
-      child: Center(
-        child: Form(
-          key: _rkey,
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: 280,
-                padding: EdgeInsets.all(10.0),
-                child: Column(
-                  children: [
-                    DateTimePicker(
-                      controller: datecontroller,
-                      type: DateTimePickerType.date,
-                      dateMask: 'd MMM, yyyy',
-                      initialValue: null,
-                      firstDate: DateTime(1950),
-                      lastDate: DateTime.now(),
-                      icon: Icon(Icons.event),
-                      dateLabelText: 'Date',
-                      // onChanged: (val) => print(val),
-                      validator: (val) {
-                        print(val);
-                        return null;
-                      },
-                      onSaved: (value) async {
-                        print(datecontroller);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 280.0,
-                margin: EdgeInsets.all(15.0),
-                child: Column(
-                  children: [
-                    DateTimePicker(
-                      controller: timecontroller,
-                      dateMask: 'd,mmm,yyyy',
-                      type: DateTimePickerType.time,
-                      use24HourFormat: true,
-                      timeLabelText: 'Time',
-                      onChanged: (val) => print(val),
-                      validator: (val) {
-                        print(val);
-                        return null;
-                      },
-                      onSaved: (value) async {
-                        print(timecontroller);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                  width: 280,
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Description',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: kTextColor,
-                          fontSize: 18.0,
-                        ),
-                      ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Name cannot be empty";
-                          } else {
-                            return null;
-                          }
-                        },
-                        controller: descriptionController,
-                        autocorrect: true,
-                        // decoration:
-                        //     InputDecoration(hintText: 'Enter Your Name Here'),
-                      ),
-                    ],
-                  )),
-
-              SizedBox(
-                height: 20.0,
-              ),
-              SizedBox(
-                height: 50.0,
-                width: 120.0,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: kButtonColor, // background
-                    onPrimary: Colors.black, // foreground
-                  ),
-                  onPressed: () {
-                    if (_rkey.currentState!.validate()) {
-                      userRegistration();
-                    }
-                  },
-                  // userRegistration,
-                  child: Text('REGISTER'),
-                ),
-              ),
-              // RaisedButton(
-              //   onPressed: userRegistration,
-              //   color: Colors.green,
-              //   textColor: Colors.white,
-              //   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-              //   child: Text('Register'),
-              // ),
-              Visibility(
-                visible: visible,
+        body: isLoading
+            ? Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
                 child: Container(
-                  margin: EdgeInsets.only(bottom: 30),
-                  child: CircularProgressIndicator(),
+                padding: EdgeInsets.all(15.0),
+                child: Center(
+                  child: Form(
+                    key: _rkey,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          width: 280,
+                          padding: EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Doctor',
+                                style: TextStyle(
+                                  color: kTextColor,
+                                  fontSize: 18.0,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: DropdownButton<Data?>(
+                                  value: selectedDoctor,
+                                  items: isLoading
+                                      ? []
+                                      : data.data!.map((e) {
+                                          return DropdownMenuItem(
+                                              value: e,
+                                              child: Text('${e.doctorname}'));
+                                        }).toList(),
+                                  onChanged: (Data? item) {
+                                    setState(() {
+                                      selectedDoctor = item;
+                                    });
+                                    print(item.runtimeType);
+                                  },
+                                  hint: Text('Select Doctor'),
+                                ),
+                              ),
+                              DateTimePicker(
+                                controller: datecontroller,
+                                type: DateTimePickerType.date,
+                                dateMask: 'd MMM, yyyy',
+                                initialValue: null,
+                                firstDate: DateTime.now(),
+                                lastDate:
+                                    DateTime.now().add(new Duration(days: 2)),
+                                dateLabelText: 'Date',
+                                selectableDayPredicate: (date) {
+                                  // Disable weekend days to select from the calendar
+                                  if (date.weekday == 6 || date.weekday == 7) {
+                                    return false;
+                                  }
+
+                                  return true;
+                                },
+                                icon: Icon(Icons.event),
+
+                                // onChanged: (val) => print(val),
+                                validator: (val) {
+                                  if (val!.isEmpty) {
+                                    return "Date cannot be empty";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                onSaved: (value) async {
+                                  print(datecontroller);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 280.0,
+                          margin: EdgeInsets.all(15.0),
+                          child: Column(
+                            children: [
+                              DateTimePicker(
+                                controller: timecontroller,
+                                // dateMask: 'd,mmm,yyyy',
+
+                                type: DateTimePickerType.time,
+                                use24HourFormat: true,
+                                timeLabelText: 'Time',
+                                timeHintText: 'Select Time in intervals of 5',
+                                onChanged: (val) => print(val),
+                                validator: (val) {
+                                  if (val!.isEmpty) {
+                                    return "Time cannot be empty";
+                                  } else {
+                                    return null;
+                                  }
+                                },
+                                onSaved: (value) async {
+                                  print(timecontroller);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                            width: 280,
+                            padding: EdgeInsets.all(10.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Description',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    color: kTextColor,
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Simple Description',
+                                  ),
+                                  maxLength: 30,
+                                  maxLines: 3,
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Name cannot be empty";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  controller: descriptionController,
+                                  autocorrect: true,
+                                  // decoration:
+                                  //     InputDecoration(hintText: 'Enter Your Name Here'),
+                                ),
+                              ],
+                            )),
+
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        SizedBox(
+                          height: 50.0,
+                          width: 120.0,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: kButtonColor, // background
+                              onPrimary: Colors.black, // foreground
+                            ),
+                            onPressed: () {
+                              if (_rkey.currentState!.validate()) {
+                                userRegistration();
+                              }
+                            },
+                            // userRegistration,
+                            child: Text('BOOK'),
+                          ),
+                        ),
+                        // RaisedButton(
+                        //   onPressed: userRegistration,
+                        //   color: Colors.green,
+                        //   textColor: Colors.white,
+                        //   padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                        //   child: Text('Register'),
+                        // ),
+                        Visibility(
+                          visible: visible,
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 30),
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    )));
+              )));
   }
 }
 

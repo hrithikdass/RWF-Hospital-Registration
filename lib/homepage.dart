@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rwf_hospital_registration/doctorlogin.dart';
 import 'constants.dart';
 import 'welcomepage.dart';
-import 'package:http/http.dart' as http;
 
 class HomePage extends StatelessWidget {
   @override
@@ -19,10 +17,10 @@ class HomePage extends StatelessWidget {
             icon: Icon(Icons.more_vert),
           )
         ],
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.menu),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(Icons.menu),
+        // ),
       ),
       body: Center(
         child: Column(

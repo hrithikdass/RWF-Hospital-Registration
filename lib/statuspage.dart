@@ -25,10 +25,10 @@ class _StatusPageState extends State<StatusPage> {
             icon: Icon(Icons.more_vert),
           )
         ],
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.menu),
-        ),
+        // leading: IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(Icons.menu),
+        // ),
       ),
       body: SingleChildScrollView(
         child: Padding(

@@ -10,7 +10,7 @@ class MyAppointment extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Apply Item Filter on JSON ListView')),
+        appBar: AppBar(title: Text('Hospital Registration')),
         body: MainListView(userid: userid),
       ),
     );

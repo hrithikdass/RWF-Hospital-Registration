@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rwf_hospital_registration/docviewappointment.dart';
-import 'package:rwf_hospital_registration/information.dart';
 import 'constants.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class WelcomeDoctor extends StatelessWidget {
   WelcomeDoctor({required this.duserid});
@@ -22,10 +19,10 @@ class WelcomeDoctor extends StatelessWidget {
               icon: Icon(Icons.more_vert),
             )
           ],
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.menu),
-          ),
+          // leading: IconButton(
+          //   onPressed: () {},
+          //   icon: Icon(Icons.menu),
+          // ),
         ),
         body: ViewAppointment(
           duserid: duserid,

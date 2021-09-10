@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rwf_hospital_registration/welcomedoctor.dart';
-import 'package:rwf_hospital_registration/welcomepage.dart';
 import 'constants.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -24,10 +23,10 @@ class DoctorLogin extends StatelessWidget {
               icon: Icon(Icons.more_vert),
             )
           ],
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.menu),
-          ),
+          // leading: IconButton(
+          //   onPressed: () {},
+          //   icon: Icon(Icons.menu),
+          // ),
         ),
         body: Center(child: LoginUser()),
       ),

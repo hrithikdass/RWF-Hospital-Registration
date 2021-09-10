@@ -3,10 +3,8 @@ import 'dart:ui';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rwf_hospital_registration/patientloginpage.dart';
 import 'constants.dart';
 import 'package:http/http.dart' as http;
-import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(RegisterApp());
 
@@ -17,7 +15,7 @@ class RegisterApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: AppBar(
-              title: Text('User Registration Form'),
+              title: Text('Hospital Registration'),
               backgroundColor: kAppBar,
               actions: [
                 IconButton(
@@ -25,10 +23,10 @@ class RegisterApp extends StatelessWidget {
                   icon: Icon(Icons.more_vert),
                 )
               ],
-              leading: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.menu),
-              ),
+              // leading: IconButton(
+              //   onPressed: () {},
+              //   icon: Icon(Icons.menu),
+              // ),
             ),
             body: Center(child: RegisterUser())));
   }
@@ -76,6 +74,7 @@ class RegisterUserState extends State {
       'phonenumber': phonenumber,
     };
 
+    print(data);
     // Starting Web API Call.
     var response = await http.post(Uri.parse(url), body: json.encode(data));
 
@@ -199,8 +198,11 @@ class RegisterUserState extends State {
                       dateLabelText: 'Date',
                       // onChanged: (val) => print(val),
                       validator: (val) {
-                        print(val);
-                        return null;
+                        if (val!.isEmpty) {
+                          return "Time cannot be empty";
+                        } else {
+                          return null;
+                        }
                       },
                       onSaved: (value) async {
                         print(dobcontroller);
