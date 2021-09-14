@@ -74,7 +74,7 @@ class _ViewAppointmentState extends State<ViewAppointment> {
               ],
             ),
             SizedBox(
-              height: 100.0,
+              height: 110.0,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,

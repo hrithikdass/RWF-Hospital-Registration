@@ -161,7 +161,7 @@ class _BookingState extends State {
         return AlertDialog(
           title: new Text(message),
           actions: <Widget>[
-            FlatButton(
+            ElevatedButton(
               child: new Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -216,15 +216,14 @@ class _BookingState extends State {
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: DropdownButton<Data?>(
+                                child: DropdownButtonFormField<Data?>(
                                   value: selectedDoctor,
-                                  items: isLoading
-                                      ? []
-                                      : data.data!.map((e) {
-                                          return DropdownMenuItem(
-                                              value: e,
-                                              child: Text('${e.doctorname}'));
-                                        }).toList(),
+                                  items: data.data?.map((e) {
+                                        return DropdownMenuItem(
+                                            value: e,
+                                            child: Text('${e.doctorname}'));
+                                      }).toList() ??
+                                      [],
                                   onChanged: (Data? item) {
                                     setState(() {
                                       selectedDoctor = item;
@@ -251,6 +250,7 @@ class _BookingState extends State {
 
                                   return true;
                                 },
+
                                 icon: Icon(Icons.event),
 
                                 // onChanged: (val) => print(val),

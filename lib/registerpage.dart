@@ -95,7 +95,7 @@ class RegisterUserState extends State {
         return AlertDialog(
           title: new Text(message),
           actions: <Widget>[
-            FlatButton(
+            ElevatedButton(
               child: new Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop();

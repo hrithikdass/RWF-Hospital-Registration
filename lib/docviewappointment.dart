@@ -9,8 +9,9 @@ class DocViewAppointment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(title: Text('Apply Item Filter on JSON ListView')),
+        appBar: AppBar(title: Text('Hospital Registration')),
         body: MainListView(duserid: duserid),
       ),
     );
