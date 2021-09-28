@@ -4,32 +4,25 @@ import 'constants.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-void main() => runApp(MaterialApp(
-      home: MyApp(),
-    ));
-
-class MyApp extends StatelessWidget {
+class PatientLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Hospital Registration'),
-          backgroundColor: kAppBar,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.more_vert),
-            )
-          ],
-          // leading: IconButton(
-          //   onPressed: () {},
-          //   icon: Icon(Icons.menu),
-          // ),
-        ),
-        body: Center(child: LoginUser()),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Hospital Registration'),
+        backgroundColor: kAppBar,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.more_vert),
+          )
+        ],
+        // leading: IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(Icons.menu),
+        // ),
       ),
+      body: Center(child: LoginUser()),
     );
   }
 }
@@ -77,12 +70,12 @@ class LoginUserState extends State {
       });
 
       // Navigate to Profile Screen & Sending Email to Next Screen.
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => StatusPage(userid: useridController.text),
-        ),
-      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StatusPage(userid: useridController.text),
+          ),
+          ModalRoute.withName('/'));
     } else {
       // If Email or Password did not Matched.
       // Hiding the CircularProgressIndicator.

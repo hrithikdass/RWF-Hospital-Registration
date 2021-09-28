@@ -6,29 +6,25 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:http/http.dart' as http;
 
-void main() => runApp(RegisterApp());
-
 class RegisterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text('Hospital Registration'),
-              backgroundColor: kAppBar,
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.more_vert),
-                )
-              ],
-              // leading: IconButton(
-              //   onPressed: () {},
-              //   icon: Icon(Icons.menu),
-              // ),
-            ),
-            body: Center(child: RegisterUser())));
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Hospital Registration'),
+          backgroundColor: kAppBar,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.more_vert),
+            )
+          ],
+          // leading: IconButton(
+          //   onPressed: () {},
+          //   icon: Icon(Icons.menu),
+          // ),
+        ),
+        body: Center(child: RegisterUser()));
   }
 }
 

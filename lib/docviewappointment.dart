@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'constants.dart';
 
 class DocViewAppointment extends StatelessWidget {
@@ -8,12 +9,9 @@ class DocViewAppointment extends StatelessWidget {
   final duserid;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(title: Text('Hospital Registration')),
-        body: MainListView(duserid: duserid),
-      ),
+    return Scaffold(
+      appBar: AppBar(title: Text('Hospital Registration')),
+      body: MainListView(duserid: duserid),
     );
   }
 }
@@ -56,6 +54,52 @@ class MainListView extends StatefulWidget {
 class MainListViewState extends State {
   MainListViewState({required this.duserid});
   final duserid;
+
+  formatDate(String date) {
+    DateTime res = DateTime.parse(date);
+    return DateFormat('hh:mm aa').format(res).toString();
+  }
+
+  Future<void> _showMyDialog(var id) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Please confirm'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text('Would you like to delete this Appointment?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () async {
+                var url =
+                    'https://blotchiest-exposure.000webhostapp.com/delete_appointment.php';
+                await http.post(Uri.parse(url), body: {
+                  'id': id.toString(),
+                });
+                print('Confirmed');
+                setState(() {});
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   // Future senddata() async {
   //   var url =
   //       "https://blotchiest-exposure.000webhostapp.com/patient_appointmentview.php";
@@ -123,13 +167,7 @@ class MainListViewState extends State {
                               height: 35.0,
                               child: TextButton.icon(
                                 onPressed: () {
-                                  setState(() {
-                                    var url =
-                                        'https://blotchiest-exposure.000webhostapp.com/delete_appointment.php';
-                                    http.post(Uri.parse(url), body: {
-                                      'id': data.id.toString(),
-                                    });
-                                  });
+                                  _showMyDialog(data.id);
                                 },
                                 icon: Icon(Icons.cancel_presentation_outlined),
                                 label: Text(''),
@@ -185,7 +223,7 @@ class MainListViewState extends State {
                           ),
                         ),
                         new Text(
-                          data.time,
+                          '${formatDate(data.time)}',
                           style: TextStyle(
                             color: kTextColor,
                             fontSize: 18.0,
@@ -670,7 +708,7 @@ class MainListViewState extends State {
 
 // import 'package:flutter/cupertino.dart';
 // import 'package:flutter/material.dart';
-// import 'package:rwf_hospital_registration/information.dart';
+
 // import 'constants.dart';
 //
 // class DocViewAppointment extends StatefulWidget {

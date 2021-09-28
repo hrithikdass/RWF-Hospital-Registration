@@ -1,36 +1,41 @@
 import 'dart:convert';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:rwf_hospital_registration/models/doctor_response_model.dart';
 import 'constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 
 class BookAppointment extends StatelessWidget {
   BookAppointment({required this.userid});
   final userid;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text('Hospital Registration'),
-              backgroundColor: kAppBar,
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.more_vert),
-                )
-              ],
-              // leading: IconButton(
-              //   onPressed: () {},
-              //   icon: Icon(Icons.menu),
-              // ),
-            ),
-            body: Center(
-                child: Booking(
-              userid: userid,
-            ))));
+    return Scaffold(
+        appBar: AppBar(
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back)),
+          title: Text('Hospital Registration'),
+          backgroundColor: kAppBar,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.more_vert),
+            )
+          ],
+          // leading: IconButton(
+          //   onPressed: () {},
+          //   icon: Icon(Icons.menu),
+          // ),
+        ),
+        body: Center(
+            child: Booking(
+          userid: userid,
+        )));
   }
 }
 
@@ -38,11 +43,11 @@ String name = '';
 var duserid;
 List results = [];
 String doctorname = '';
+var time;
 
 class Booking extends StatefulWidget {
   Booking({required this.userid});
   final userid;
-
   @override
   _BookingState createState() => _BookingState(userid: userid);
 }
@@ -122,7 +127,8 @@ class _BookingState extends State {
     // Getting value from Controller
     String description = descriptionController.text;
     String date = datecontroller.text;
-    String time = timecontroller.text;
+    // String time = timecontroller.text;
+    // String time = '';
 
     // SERVER API URL
     var url =
@@ -133,7 +139,7 @@ class _BookingState extends State {
       'userid': userid,
       'name': name,
       'date': date,
-      'time': time,
+      'time': formatFinalDate(time.toString()),
       'description': description,
       'duserid': selectedDoctor!.duserid,
       'doctorname': selectedDoctor!.doctorname,
@@ -189,6 +195,16 @@ class _BookingState extends State {
     await getUserName();
   }
 
+  formatDate(String date) {
+    DateTime res = DateTime.parse(date);
+    return DateFormat('hh:mm aa').format(res).toString();
+  }
+
+  formatFinalDate(String date) {
+    DateTime res = DateTime.parse(date);
+    return DateFormat('yyyy-MM-dd HH:mm').format(res).toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -233,6 +249,9 @@ class _BookingState extends State {
                                   hint: Text('Select Doctor'),
                                 ),
                               ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
                               DateTimePicker(
                                 controller: datecontroller,
                                 type: DateTimePickerType.date,
@@ -242,14 +261,14 @@ class _BookingState extends State {
                                 lastDate:
                                     DateTime.now().add(new Duration(days: 2)),
                                 dateLabelText: 'Date',
-                                selectableDayPredicate: (date) {
-                                  // Disable weekend days to select from the calendar
-                                  if (date.weekday == 6 || date.weekday == 7) {
-                                    return false;
-                                  }
-
-                                  return true;
-                                },
+                                // selectableDayPredicate: (date) {
+                                //   // Disable weekend days to select from the calendar
+                                //   if (date.weekday == 6 || date.weekday == 7) {
+                                //     return false;
+                                //   }
+                                //
+                                //   return true;
+                                // },
 
                                 icon: Icon(Icons.event),
 
@@ -268,31 +287,124 @@ class _BookingState extends State {
                             ],
                           ),
                         ),
+                        SizedBox(
+                          height: 15.0,
+                        ),
                         Container(
                           width: 280.0,
                           margin: EdgeInsets.all(15.0),
                           child: Column(
                             children: [
-                              DateTimePicker(
-                                controller: timecontroller,
-                                // dateMask: 'd,mmm,yyyy',
-
-                                type: DateTimePickerType.time,
-                                use24HourFormat: true,
-                                timeLabelText: 'Time',
-                                timeHintText: 'Select Time in intervals of 5',
-                                onChanged: (val) => print(val),
-                                validator: (val) {
-                                  if (val!.isEmpty) {
-                                    return "Time cannot be empty";
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                onSaved: (value) async {
-                                  print(timecontroller);
-                                },
-                              ),
+                              GestureDetector(
+                                  onTap: () async {
+                                    showModalBottomSheet(
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(15),
+                                                topRight: Radius.circular(15))),
+                                        context: context,
+                                        builder: (context) {
+                                          return Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                2.3,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                color: Colors.white),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(10),
+                                              child: Column(
+                                                children: [
+                                                  Text('Select Time',
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w600)),
+                                                  TimePickerSpinner(
+                                                    is24HourMode: false,
+                                                    minutesInterval: 5,
+                                                    normalTextStyle: TextStyle(
+                                                        fontSize: 24,
+                                                        color: kTextColor),
+                                                    highlightedTextStyle:
+                                                        TextStyle(
+                                                            fontSize: 24,
+                                                            color: kAppBar),
+                                                    spacing: 50,
+                                                    itemHeight: 80,
+                                                    isForce2Digits: true,
+                                                    onTimeChange: (timee) {
+                                                      setState(() {
+                                                        time = timee;
+                                                        print(timee);
+                                                      });
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        });
+                                  },
+                                  child: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 10),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          height: 20,
+                                          width: double.infinity,
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.timer,
+                                                color: Colors.grey.shade600,
+                                              ),
+                                              SizedBox(width: 10),
+                                              time != null
+                                                  ? Text(
+                                                      '${formatDate(time.toString())}')
+                                                  : Text(
+                                                      'Please select a time'),
+                                            ],
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Divider(
+                                          color: Colors.black,
+                                          thickness: 0.6,
+                                        )
+                                      ],
+                                    ),
+                                  )),
+                              // DateTimePicker(
+                              //   controller: timecontroller,
+                              //   // dateMask: 'd,mmm,yyyy',
+                              //   timePickerEntryModeInput: false,
+                              //   type: DateTimePickerType.time,
+                              //   use24HourFormat: true,
+                              //   timeLabelText: 'Time',
+                              //
+                              //   timeHintText: 'Select Time in intervals of 5',
+                              //   onChanged: (val) => print(val),
+                              //   validator: (val) {
+                              //     if (val!.isEmpty) {
+                              //       return "Time cannot be empty";
+                              //     } else {
+                              //       return null;
+                              //     }
+                              //   },
+                              //   onSaved: (value) async {
+                              //     print(timecontroller);
+                              //   },
+                              // ),
                             ],
                           ),
                         ),

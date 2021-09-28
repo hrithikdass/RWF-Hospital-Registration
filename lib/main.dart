@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rwf_hospital_registration/doctorlogin.dart';
 import 'package:rwf_hospital_registration/docviewappointment.dart';
 import 'package:rwf_hospital_registration/myappointment.dart';
+import 'package:rwf_hospital_registration/patientloginpage.dart';
 import 'package:rwf_hospital_registration/registerpage.dart';
 import 'package:rwf_hospital_registration/statuspage.dart';
 import 'package:rwf_hospital_registration/welcomedoctor.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         '/Welcome': (context) => WelcomePage(
               userid: '',
             ),
-        '/Patientlogi': (context) => MyApp(),
+        '/Patientlogin': (context) => PatientLogin(),
         '/Register': (context) => RegisterApp(),
         '/Status': (context) => StatusPage(
               userid: '',
@@ -37,7 +38,6 @@ class MyApp extends StatelessWidget {
               duserid: '',
             ),
         '/doctorlogin': (context) => DoctorLogin(),
-        '/information': (context) => MyApp(),
         '/myappointment': (context) => MyAppointment(
               userid: '',
             ),
@@ -48,8 +48,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-/* colors app bar: 3F51B5
-button : FF4181
-text : EA4B81
- */

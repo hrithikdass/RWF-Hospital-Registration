@@ -17,6 +17,7 @@ class _StatusPageState extends State<StatusPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Container(),
         title: Text('Hospital Registration'),
         backgroundColor: kAppBar,
         actions: [
