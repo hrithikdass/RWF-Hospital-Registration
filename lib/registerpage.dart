@@ -13,12 +13,7 @@ class RegisterApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Hospital Registration'),
           backgroundColor: kAppBar,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.more_vert),
-            )
-          ],
+          actions: [FeedbackMail()],
           // leading: IconButton(
           //   onPressed: () {},
           //   icon: Icon(Icons.menu),
@@ -282,7 +277,7 @@ class RegisterUserState extends State {
                 ),
               ),
               SizedBox(
-                height: 20.0,
+                height: 30.0,
               ),
               SizedBox(
                 height: 50.0,

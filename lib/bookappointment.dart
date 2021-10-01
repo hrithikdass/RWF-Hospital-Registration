@@ -21,12 +21,7 @@ class BookAppointment extends StatelessWidget {
               child: Icon(Icons.arrow_back)),
           title: Text('Hospital Registration'),
           backgroundColor: kAppBar,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.more_vert),
-            )
-          ],
+          actions: [FeedbackMail()],
           // leading: IconButton(
           //   onPressed: () {},
           //   icon: Icon(Icons.menu),
@@ -261,14 +256,14 @@ class _BookingState extends State {
                                 lastDate:
                                     DateTime.now().add(new Duration(days: 2)),
                                 dateLabelText: 'Date',
-                                // selectableDayPredicate: (date) {
-                                //   // Disable weekend days to select from the calendar
-                                //   if (date.weekday == 6 || date.weekday == 7) {
-                                //     return false;
-                                //   }
-                                //
-                                //   return true;
-                                // },
+                                selectableDayPredicate: (date) {
+                                  // Disable weekend days to select from the calendar
+                                  if (date.weekday == 6 || date.weekday == 7) {
+                                    return false;
+                                  }
+
+                                  return true;
+                                },
 
                                 icon: Icon(Icons.event),
 

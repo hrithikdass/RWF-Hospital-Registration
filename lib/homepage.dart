@@ -11,12 +11,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Hospital Registration'),
         backgroundColor: kAppBar,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.more_vert),
-          )
-        ],
+        actions: [FeedbackMail()],
         // leading: IconButton(
         //   onPressed: () {},
         //   icon: Icon(Icons.menu),
@@ -39,9 +34,7 @@ class HomePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return WelcomePage(
-                          userid: '',
-                        );
+                        return WelcomePage();
                       },
                     ),
                   );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:rwf_hospital_registration/statuspage.dart';
+
 import 'constants.dart';
 
 class MyAppointment extends StatelessWidget {
@@ -12,24 +12,13 @@ class MyAppointment extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return StatusPage(userid: userid);
-            },
-          ),
-        );
+        Navigator.pop(context);
         return true;
       },
       child: Scaffold(
         appBar: AppBar(
-            leading: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(Icons.arrow_back)),
-            title: Text('Hospital Registration')),
+          title: Text('Hospital Registration'),
+        ),
         body: MainListView(userid: userid),
       ),
     );
@@ -175,8 +164,7 @@ class MainListViewState extends State {
               .map((data) => Container(
                     decoration: BoxDecoration(
                         border: Border.all(width: 1, color: kAppBar)),
-                    padding: EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: 0, bottom: 15.0),
+                    padding: EdgeInsets.only(bottom: 15.0),
                     child: Column(
                       children: [
                         Row(

@@ -11,12 +11,7 @@ class PatientLogin extends StatelessWidget {
       appBar: AppBar(
         title: Text('Hospital Registration'),
         backgroundColor: kAppBar,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.more_vert),
-          )
-        ],
+        actions: [FeedbackMail()],
         // leading: IconButton(
         //   onPressed: () {},
         //   icon: Icon(Icons.menu),
@@ -70,12 +65,12 @@ class LoginUserState extends State {
       });
 
       // Navigate to Profile Screen & Sending Email to Next Screen.
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) => StatusPage(userid: useridController.text),
-          ),
-          ModalRoute.withName('/'));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => StatusPage(userid: useridController.text),
+        ),
+      );
     } else {
       // If Email or Password did not Matched.
       // Hiding the CircularProgressIndicator.
@@ -190,7 +185,7 @@ class LoginUserState extends State {
               ),
             ),
             SizedBox(
-              height: 20.0,
+              height: 35.0,
             ),
             SizedBox(
               height: 50.0,

@@ -10,7 +10,15 @@ class DocViewAppointment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Hospital Registration')),
+      appBar: AppBar(
+        title: Text('Hospital Registration'),
+        backgroundColor: kAppBar,
+        actions: [FeedbackMail()],
+        // leading: IconButton(
+        //   onPressed: () {},
+        //   icon: Icon(Icons.menu),
+        // ),
+      ),
       body: MainListView(duserid: duserid),
     );
   }
@@ -156,8 +164,7 @@ class MainListViewState extends State {
               .map((data) => Container(
                     decoration: BoxDecoration(
                         border: Border.all(width: 1, color: kAppBar)),
-                    padding: EdgeInsets.only(
-                        left: 20.0, right: 20.0, top: 0, bottom: 15.0),
+                    padding: EdgeInsets.only(bottom: 15.0),
                     child: Column(
                       children: [
                         Row(

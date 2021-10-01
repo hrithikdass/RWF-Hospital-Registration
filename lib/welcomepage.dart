@@ -5,7 +5,7 @@ import 'package:rwf_hospital_registration/registerpage.dart';
 import 'constants.dart';
 
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key, required String userid}) : super(key: key);
+  // const WelcomePage({Key? key, required String userid}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +13,7 @@ class WelcomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Hospital Registration'),
         backgroundColor: kAppBar,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.more_vert),
-          )
-        ],
+        actions: [FeedbackMail()],
         // leading: IconButton(
         //   onPressed: () {},
         //   icon: Icon(Icons.menu),

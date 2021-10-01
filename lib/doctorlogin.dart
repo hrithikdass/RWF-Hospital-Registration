@@ -4,10 +4,6 @@ import 'constants.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-void main() => runApp(MaterialApp(
-      home: DoctorLogin(),
-    ));
-
 class DoctorLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -15,12 +11,7 @@ class DoctorLogin extends StatelessWidget {
       appBar: AppBar(
         title: Text('Hospital Registration'),
         backgroundColor: kAppBar,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.more_vert),
-          )
-        ],
+        actions: [FeedbackMail()],
         // leading: IconButton(
         //   onPressed: () {},
         //   icon: Icon(Icons.menu),
@@ -194,7 +185,7 @@ class LoginUserState extends State {
               ),
             ),
             SizedBox(
-              height: 20.0,
+              height: 35.0,
             ),
             SizedBox(
               height: 50.0,
