@@ -49,7 +49,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\hr
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] C:\Users\hrith\.gradle\caches\transforms-2\files-2.1\2e94107f30f39be366a17347c2bf100b\core-1.1.0\AndroidManifest.xml:24:18-86
 	android:label
-		ADDED from C:\Users\hrith\StudioProjects\rwf_hospital_registration\android\app\src\main\AndroidManifest.xml:4:9-50
+		ADDED from C:\Users\hrith\StudioProjects\rwf_hospital_registration\android\app\src\main\AndroidManifest.xml:4:9-48
 	android:icon
 		ADDED from C:\Users\hrith\StudioProjects\rwf_hospital_registration\android\app\src\main\AndroidManifest.xml:5:9-43
 activity#com.example.rwf_hospital_registration.MainActivity

@@ -18,6 +18,12 @@ class MyAppointment extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Hospital Registration'),
+          backgroundColor: kAppBar,
+          actions: [FeedbackMail()],
+          // leading: IconButton(
+          //   onPressed: () {},
+          //   icon: Icon(Icons.menu),
+          // ),
         ),
         body: MainListView(userid: userid),
       ),

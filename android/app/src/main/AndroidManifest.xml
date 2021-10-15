@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rwf_hospital_registration">
    <application
-        android:label="rwf_hospital_registration"
+        android:label="RWF Hospital Management"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
