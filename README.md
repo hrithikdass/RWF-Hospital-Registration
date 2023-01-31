@@ -37,7 +37,7 @@ This project is a starting point for a Flutter application.
 
 #### Error
 
-<img src="AppPictures/error.png" width="100">
+<img src="AppPictures/error.png" width="200">
 
 
 
